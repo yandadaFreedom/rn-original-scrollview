@@ -1,118 +1,71 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  wrapper: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    height: 130,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  scrollView: {
+    backgroundColor: 'red',
+    width: "100%",
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  viewContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "stretch",
+    minHeight: 45,
+    minWidth: '100%'
   },
-  highlight: {
-    fontWeight: '700',
+  ViewItem: {
+    position: 'relative',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: "25%",
   },
+  View1: {
+    backgroundColor: 'pink',
+  },
+   View2: {
+    backgroundColor: 'green',
+  },
+   View3: {
+    backgroundColor: 'blue',
+  }
 });
+
+function App() {
+  function onTouchStart3 () {
+    alert('onTouchStart3')
+  }
+  function onTouchStart2 () {
+    alert('onTouchStart2')
+  }
+  function onTouchStart1 () {
+    alert('onTouchStart1')
+  }
+  return (
+      <View style={styles.wrapper}>
+        <ScrollView
+          horizontal={true}
+          style={styles.scrollView}
+        >
+          <View style={styles.viewContainer}>
+            <View onTouchStart={onTouchStart1} style={{...styles.ViewItem, ...styles.View1}}><Text>View1</Text></View>
+            <View onTouchStart={onTouchStart2}  style={{...styles.ViewItem, ...styles.View2}}><Text>View2</Text></View>
+            <View onTouchStart={onTouchStart3} style={{...styles.ViewItem, ...styles.View3}}><Text>View3</Text></View>
+          </View>
+        </ScrollView>
+      </View>
+  );
+}
+
+
 
 export default App;
